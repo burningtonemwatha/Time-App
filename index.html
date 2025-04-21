@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Time Page</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    #time {
+      font-size: 4em;
+      margin: 20px 0;
+    }
+
+    .light-mode {
+      background-color: #f4f4f4;
+      color: #000;
+    }
+
+    .dark-mode {
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    .morning.light-mode {
+      background-color: #FFFAE3;
+    }
+
+    .afternoon.light-mode {
+      background-color: #FFE5B4;
+    }
+
+    .night.light-mode {
+      background-color: #2C3E50;
+      color: #ecf0f1;
+    }
+
+    .content-container {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .night {
+      background-color: #2C3E50;
+      color: #ecf0f1;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <div class="content-container">
+    <h1>Hello, East African Time, It Is Currently</h1>
+    <div id="time">Loading...</div>
+    <button id="modeToggleBtn" onclick="toggleMode()">Switch to Dark Mode</button>
+  </div>
+
+  <script>
+    function updateTimeAndBackground() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      const timeString = `${hour12}:${minutes}:${seconds} ${ampm}`;
+      document.getElementById("time").innerText = timeString;
+
+      const body = document.body;
+      body.classList.remove("morning", "afternoon", "night");
+
+      if (body.classList.contains("light-mode")) {
+        if (hours >= 6 && hours < 12) {
+          body.classList.add("morning");
+        } else if (hours >= 12 && hours < 18) {
+          body.classList.add("afternoon");
+        } else {
+          body.classList.add("night");
+        }
+      }
+    }
+
+    function toggleMode() {
+      const body = document.body;
+      const button = document.getElementById("modeToggleBtn");
+
+      body.classList.toggle("dark-mode");
+      body.classList.toggle("light-mode");
+
+      // Update button text
+      if (body.classList.contains("dark-mode")) {
+        button.innerText = "Light Mode";
+      } else {
+        button.innerText = "Dark Mode";
+      }
+
+      // Refresh background based on new mode
+      updateTimeAndBackground();
+    }
+
+    updateTimeAndBackground();
+    setInterval(updateTimeAndBackground, 1000);
+
+    document.getElementById("modeToggleBtn").innerText =
+      document.body.classList.contains("dark-mode")
+        ? "Light Mode"
+        : "Dark Mode";
+  </script>
+
+</body>
+</html>
