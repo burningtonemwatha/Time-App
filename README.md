@@ -5,7 +5,7 @@ A simple and elegant HTML/JavaScript webpage that:
 - 🎨 Changes the **background color based on the time of day** (morning, afternoon, night)
 - 🌗 Allows users to switch between **Light Mode and Dark Mode**
 - 💨 Includes a **blurred, glassy container** for a modern UI touch
-- 📡 Hosted live on [InfinityFree](https://timenow.infinityfreeapp.com/)
+- 📡 Hosted live on [InfinityFree](http://timenow.infinityfreeapp.com/)
 
 ---
 
@@ -21,7 +21,7 @@ A simple and elegant HTML/JavaScript webpage that:
 
 ## 🚀 Live Demo
 
-🔗 [Visit the Live Site](https://timenow.infinityfreeapp.com/)
+🔗 [Visit the Live Site](http://timenow.infinityfreeapp.com/)
 
 ---
 
